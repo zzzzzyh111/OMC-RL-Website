@@ -37,17 +37,180 @@
   href="https://cdn.jsdelivr.net/gh/jpswalsh/academicons@1/css/academicons.min.css">
   <link rel="stylesheet" href="static/css/index.css">
 
+  <!-- Custom Styles -->
+  <style>
+    /* Smooth scrolling */
+    html {
+      scroll-behavior: smooth;
+    }
+
+    /* Custom button hover effects */
+    .custom-button {
+      transition: all 0.3s ease !important;
+      transform: translateY(0px);
+    }
+    
+    .custom-button:hover {
+      transform: translateY(-3px) !important;
+      box-shadow: 0 8px 25px rgba(0,0,0,0.15) !important;
+      background: linear-gradient(135deg, #667eea 0%, #764ba2 100%) !important;
+      border-color: transparent !important;
+    }
+
+    /* Navigation hover effects */
+    .nav-link:hover {
+      color: #667eea !important;
+      transform: translateY(-2px);
+    }
+
+    /* Framework image hover effect */
+    #framework-img:hover {
+      transform: scale(1.02);
+      box-shadow: 0 10px 30px rgba(0,0,0,0.1);
+    }
+
+    /* Improved typography */
+    .publication-title {
+      line-height: 1.3 !important;
+      letter-spacing: -0.5px;
+    }
+
+    .subtitle {
+      line-height: 1.6 !important;
+    }
+
+    /* Carousel improvements */
+    .carousel .item {
+      padding: 2rem 1rem;
+    }
+
+    /* Section spacing */
+    .hero-body {
+      padding: 3rem 1.5rem !important;
+    }
+
+    /* Back to top button hover */
+    #backToTop:hover {
+      background: linear-gradient(135deg, #764ba2 0%, #667eea 100%) !important;
+      transform: translateY(-2px);
+      box-shadow: 0 6px 20px rgba(0,0,0,0.25) !important;
+    }
+
+    /* Fade in animation */
+    .fade-in {
+      opacity: 0;
+      transform: translateY(30px);
+      transition: opacity 0.8s ease, transform 0.8s ease;
+    }
+
+    .fade-in.visible {
+      opacity: 1;
+      transform: translateY(0);
+    }
+  </style>
+
   <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
   <script src="https://documentcloud.adobe.com/view-sdk/main.js"></script>
   <script defer src="static/js/fontawesome.all.min.js"></script>
   <script src="static/js/bulma-carousel.min.js"></script>
   <script src="static/js/bulma-slider.min.js"></script>
   <script src="static/js/index.js"></script>
+
+  <!-- Custom JavaScript -->
+  <script>
+    // Back to top functionality
+    function scrollToTop() {
+      window.scrollTo({
+        top: 0,
+        behavior: 'smooth'
+      });
+    }
+
+    // Show/hide back to top button
+    window.addEventListener('scroll', function() {
+      const backToTop = document.getElementById('backToTop');
+      if (window.pageYOffset > 300) {
+        backToTop.style.opacity = '1';
+        backToTop.style.visibility = 'visible';
+      } else {
+        backToTop.style.opacity = '0';
+        backToTop.style.visibility = 'hidden';
+      }
+    });
+
+    // Image modal functionality
+    function openModal(imgId) {
+      const modal = document.getElementById('imageModal');
+      const modalImg = document.getElementById('modalImg');
+      const img = document.getElementById(imgId);
+      
+      modal.style.display = 'block';
+      modalImg.src = img.src;
+      document.body.style.overflow = 'hidden';
+    }
+
+    function closeModal() {
+      const modal = document.getElementById('imageModal');
+      modal.style.display = 'none';
+      document.body.style.overflow = 'auto';
+    }
+
+    // Close modal with ESC key
+    document.addEventListener('keydown', function(event) {
+      if (event.key === 'Escape') {
+        closeModal();
+      }
+    });
+
+    // Smooth scrolling for navigation links
+    document.querySelectorAll('a[href^="#"]').forEach(anchor => {
+      anchor.addEventListener('click', function (e) {
+        e.preventDefault();
+        const target = document.querySelector(this.getAttribute('href'));
+        if (target) {
+          target.scrollIntoView({
+            behavior: 'smooth',
+            block: 'start'
+          });
+        }
+      });
+    });
+
+    // Fade in animation on scroll
+    function fadeInOnScroll() {
+      const elements = document.querySelectorAll('.fade-in');
+      
+      elements.forEach(element => {
+        const elementTop = element.getBoundingClientRect().top;
+        const elementVisible = 150;
+        
+        if (elementTop < window.innerHeight - elementVisible) {
+          element.classList.add('visible');
+        }
+      });
+    }
+
+    window.addEventListener('scroll', fadeInOnScroll);
+    window.addEventListener('load', fadeInOnScroll);
+  </script>
 </head>
 <body>
 
+  <!-- Navigation Bar -->
+  <nav class="navbar is-fixed-top" role="navigation" aria-label="main navigation" style="background-color: rgba(255,255,255,0.95); backdrop-filter: blur(10px); box-shadow: 0 2px 8px rgba(0,0,0,0.1); transition: all 0.3s ease;">
+    <div class="navbar-brand">
+      <span class="navbar-item" style="font-weight: bold; color: #363636;">OMC-RL</span>
+    </div>
+    <div class="navbar-menu" style="display: flex !important;">
+      <div class="navbar-end">
+        <a class="navbar-item nav-link" href="#abstract" style="transition: color 0.3s ease;">Abstract</a>
+        <a class="navbar-item nav-link" href="#framework" style="transition: color 0.3s ease;">Framework</a>
+        <a class="navbar-item nav-link" href="#results" style="transition: color 0.3s ease;">Results</a>
+      </div>
+    </div>
+  </nav>
 
-  <section class="hero">
+  <section class="hero" style="margin-top: 52px;">
     <div class="hero-body">
       <div class="container is-max-desktop">
         <div class="columns is-centered">
@@ -87,7 +250,7 @@
                     <!-- Supplementary PDF link -->
                     <span class="link-block">
                       <a href="https://www.youtube.com/watch?v=De2RkUzldBg&t=5s" target="_blank"
-                      class="external-link button is-normal is-rounded is-dark">
+                      class="external-link button is-normal is-rounded is-dark custom-button">
                       <span class="icon">
                         <i class="fas fa-video"></i>
                       </span>
@@ -98,7 +261,7 @@
                   <!-- Github link -->
                   <span class="link-block">
                     <a href="https://github.com/zzzzzyh111/OMC-RL" target="_blank"
-                    class="external-link button is-normal is-rounded is-dark">
+                    class="external-link button is-normal is-rounded is-dark custom-button">
                     <span class="icon">
                       <i class="fab fa-github"></i>
                     </span>
@@ -126,10 +289,11 @@
 
 
 <!-- Teaser video-->
-<section class="hero teaser">
+<section class="hero teaser" id="framework">
   <div class="container is-max-desktop">
-    <div class="hero-body has-text-centered">
-      <img src="static/images/framework.jpg" alt="Framework Overview" style="max-width: 100%; height: auto;">
+    <div class="hero-body has-text-centered fade-in">
+      <img src="static/images/framework.jpg" alt="Framework Overview" style="max-width: 100%; height: auto; cursor: pointer; transition: transform 0.3s ease, box-shadow 0.3s ease;" id="framework-img" onclick="openModal('framework-img')">
+      <p style="font-size: 0.9em; color: #777; margin-top: 0.5rem;">Click to view larger image</p>
       <h2 class="subtitle has-text-centered mt-4">
         The framework of OMC-RL. Upstream training (top): A masked contrastive learning module is used to learn compact and task-relevant visual representations from sequential RGB inputs. The masked and original inputs are processed through CNN encoders and projection layers, while the masked branch is further processed by an auxiliary transformer module to compute the contrastive loss L_cl. After training, the CNN encoder is frozen and the transformer module is discarded. Downstream training (bottom): An RL agent is trained with the frozen encoder from the upstream stage. An oracle policy trained with privileged depth inputs and full-state information provides expert supervision. The agent policy is optimized via KL-divergence against the oracle policy distribution to enable efficient visuomotor policy learning.
       </h2>
@@ -139,10 +303,10 @@
 <!-- End teaser video -->
 
 <!-- Paper abstract -->
-<section class="section hero is-light">
+<section class="section hero is-light" id="abstract">
   <div class="container is-max-desktop">
     <div class="columns is-centered has-text-centered">
-      <div class="column is-four-fifths">
+      <div class="column is-four-fifths fade-in">
         <h2 class="title is-3">Abstract</h2>
         <div class="content has-text-justified">
           <p>
@@ -157,9 +321,9 @@
 
 
 <!-- Image carousel -->
-<section class="hero is-small">
+<section class="hero is-small" id="results">
   <div class="hero-body">
-    <div class="container">
+    <div class="container fade-in">
       <div id="results-carousel" class="carousel results-carousel">
        <div class="item" style="display: flex; flex-direction: column; align-items: center;">
         <!-- Your image here -->
@@ -194,6 +358,60 @@
 </div>
 </section>
 <!-- End image carousel -->
+
+<!-- Back to top button -->
+<button id="backToTop" style="
+  position: fixed;
+  bottom: 20px;
+  right: 20px;
+  z-index: 1000;
+  background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+  color: white;
+  border: none;
+  border-radius: 50%;
+  width: 50px;
+  height: 50px;
+  font-size: 18px;
+  cursor: pointer;
+  opacity: 0;
+  visibility: hidden;
+  transition: all 0.3s ease;
+  box-shadow: 0 4px 12px rgba(0,0,0,0.15);
+" onclick="scrollToTop()">
+  <i class="fas fa-arrow-up"></i>
+</button>
+
+<!-- Image Modal -->
+<div id="imageModal" style="
+  display: none;
+  position: fixed;
+  z-index: 2000;
+  left: 0;
+  top: 0;
+  width: 100%;
+  height: 100%;
+  background-color: rgba(0,0,0,0.8);
+  backdrop-filter: blur(5px);
+" onclick="closeModal()">
+  <span style="
+    position: absolute;
+    top: 15px;
+    right: 35px;
+    color: #f1f1f1;
+    font-size: 40px;
+    font-weight: bold;
+    cursor: pointer;
+  " onclick="closeModal()">&times;</span>
+  <img id="modalImg" style="
+    margin: auto;
+    display: block;
+    width: 90%;
+    max-width: 1200px;
+    max-height: 90vh;
+    object-fit: contain;
+    margin-top: 5vh;
+  ">
+</div>
 
 
 
