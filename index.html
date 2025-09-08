@@ -232,47 +232,6 @@
       50% { transform: translate(-50%, -50%) rotate(180deg) scale(1.1); }
     }
 
-    /* Mouse cursor follow effect */
-    .cursor-dot {
-      position: fixed;
-      top: 50%;
-      left: 50%;
-      width: 8px;
-      height: 8px;
-      background: linear-gradient(135deg, #667eea, #764ba2);
-      border-radius: 50%;
-      pointer-events: none;
-      z-index: 9999;
-      transition: transform 0.1s ease;
-      transform: translate(-50%, -50%);
-    }
-
-    .cursor-outline {
-      position: fixed;
-      top: 50%;
-      left: 50%;
-      width: 40px;
-      height: 40px;
-      border: 2px solid rgba(102, 126, 234, 0.3);
-      border-radius: 50%;
-      pointer-events: none;
-      z-index: 9998;
-      transition: transform 0.15s ease, width 0.15s ease, height 0.15s ease;
-      transform: translate(-50%, -50%);
-    }
-
-    .cursor-outline.hover {
-      width: 60px;
-      height: 60px;
-      border-color: rgba(102, 126, 234, 0.5);
-    }
-
-    /* Hide cursor effects on mobile */
-    @media (hover: none) {
-      .cursor-dot, .cursor-outline {
-        display: none;
-      }
-    }
 
     /* Enhanced CSS animations */
     .publication-title {
@@ -469,39 +428,6 @@
     // Start particle animation after page load
     window.addEventListener('load', startParticles);
 
-    // Custom cursor effect
-    let cursorDot, cursorOutline;
-    
-    window.addEventListener('load', function() {
-      // Create cursor elements
-      cursorDot = document.createElement('div');
-      cursorDot.className = 'cursor-dot';
-      document.body.appendChild(cursorDot);
-      
-      cursorOutline = document.createElement('div');
-      cursorOutline.className = 'cursor-outline';
-      document.body.appendChild(cursorOutline);
-      
-      // Track mouse movement
-      document.addEventListener('mousemove', function(e) {
-        cursorDot.style.left = e.clientX + 'px';
-        cursorDot.style.top = e.clientY + 'px';
-        
-        cursorOutline.style.left = e.clientX + 'px';
-        cursorOutline.style.top = e.clientY + 'px';
-      });
-      
-      // Add hover effect for clickable elements
-      const hoverElements = document.querySelectorAll('a, button, .custom-button, img[onclick]');
-      hoverElements.forEach(element => {
-        element.addEventListener('mouseenter', () => {
-          cursorOutline.classList.add('hover');
-        });
-        element.addEventListener('mouseleave', () => {
-          cursorOutline.classList.remove('hover');
-        });
-      });
-    });
   </script>
 </head>
 <body>
