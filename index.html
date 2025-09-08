@@ -63,6 +63,36 @@
       transform: translateY(-2px);
     }
 
+    /* Author links hover effects */
+    .author-block a {
+      transition: all 0.3s ease !important;
+      position: relative;
+      text-decoration: none !important;
+      color: #3273dc !important;
+    }
+    
+    .author-block a:hover {
+      color: #667eea !important;
+      transform: translateY(-2px);
+      text-shadow: 0 2px 4px rgba(102, 126, 234, 0.3);
+    }
+    
+    .author-block a::after {
+      content: '';
+      position: absolute;
+      width: 0;
+      height: 2px;
+      bottom: -2px;
+      left: 50%;
+      background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+      transition: all 0.3s ease;
+      transform: translateX(-50%);
+    }
+    
+    .author-block a:hover::after {
+      width: 100%;
+    }
+
     /* Framework image hover effect */
     #framework-img:hover {
       transform: scale(1.02);
@@ -106,6 +136,223 @@
     .fade-in.visible {
       opacity: 1;
       transform: translateY(0);
+    }
+
+    /* Particle background */
+    .particles-container {
+      position: fixed;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 100%;
+      pointer-events: none;
+      z-index: -1;
+      overflow: hidden;
+    }
+
+    .particle {
+      position: absolute;
+      background: linear-gradient(135deg, rgba(102, 126, 234, 0.1), rgba(118, 75, 162, 0.1));
+      border-radius: 50%;
+      pointer-events: none;
+      animation: float 20s infinite linear;
+    }
+
+    @keyframes float {
+      0% {
+        transform: translateY(100vh) rotate(0deg);
+        opacity: 0;
+      }
+      10% {
+        opacity: 0.7;
+      }
+      90% {
+        opacity: 0.7;
+      }
+      100% {
+        transform: translateY(-10vh) rotate(360deg);
+        opacity: 0;
+      }
+    }
+
+    .particle:nth-child(even) {
+      animation-direction: reverse;
+      animation-duration: 25s;
+    }
+
+    /* Carousel image hover effects */
+    #carousel-img-1:hover, #carousel-img-2:hover, 
+    #carousel-img-3:hover, #carousel-img-4:hover {
+      transform: scale(1.02);
+      box-shadow: 0 10px 30px rgba(0,0,0,0.1);
+    }
+
+    /* Decorative section dividers */
+    .section-divider {
+      width: 100%;
+      height: 1px;
+      background: linear-gradient(90deg, transparent 0%, rgba(102, 126, 234, 0.3) 50%, transparent 100%);
+      margin: 3rem 0;
+      position: relative;
+    }
+
+    .section-divider::before {
+      content: '';
+      position: absolute;
+      left: 50%;
+      top: 50%;
+      transform: translate(-50%, -50%);
+      width: 60px;
+      height: 60px;
+      background: linear-gradient(135deg, rgba(102, 126, 234, 0.1), rgba(118, 75, 162, 0.1));
+      border-radius: 50%;
+      border: 2px solid rgba(102, 126, 234, 0.3);
+    }
+
+    .section-divider::after {
+      content: '✦';
+      position: absolute;
+      left: 50%;
+      top: 50%;
+      transform: translate(-50%, -50%);
+      color: rgba(102, 126, 234, 0.7);
+      font-size: 20px;
+      background: white;
+      width: 40px;
+      height: 40px;
+      border-radius: 50%;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      animation: sparkle 3s ease-in-out infinite;
+    }
+
+    @keyframes sparkle {
+      0%, 100% { transform: translate(-50%, -50%) rotate(0deg) scale(1); }
+      50% { transform: translate(-50%, -50%) rotate(180deg) scale(1.1); }
+    }
+
+    /* Mouse cursor follow effect */
+    .cursor-dot {
+      position: fixed;
+      top: 50%;
+      left: 50%;
+      width: 8px;
+      height: 8px;
+      background: linear-gradient(135deg, #667eea, #764ba2);
+      border-radius: 50%;
+      pointer-events: none;
+      z-index: 9999;
+      transition: transform 0.1s ease;
+      transform: translate(-50%, -50%);
+    }
+
+    .cursor-outline {
+      position: fixed;
+      top: 50%;
+      left: 50%;
+      width: 40px;
+      height: 40px;
+      border: 2px solid rgba(102, 126, 234, 0.3);
+      border-radius: 50%;
+      pointer-events: none;
+      z-index: 9998;
+      transition: transform 0.15s ease, width 0.15s ease, height 0.15s ease;
+      transform: translate(-50%, -50%);
+    }
+
+    .cursor-outline.hover {
+      width: 60px;
+      height: 60px;
+      border-color: rgba(102, 126, 234, 0.5);
+    }
+
+    /* Hide cursor effects on mobile */
+    @media (hover: none) {
+      .cursor-dot, .cursor-outline {
+        display: none;
+      }
+    }
+
+    /* Enhanced CSS animations */
+    .publication-title {
+      animation: titleGlow 4s ease-in-out infinite alternate;
+    }
+
+    @keyframes titleGlow {
+      0% { text-shadow: 0 0 5px rgba(102, 126, 234, 0.3); }
+      100% { text-shadow: 0 0 20px rgba(102, 126, 234, 0.6), 0 0 30px rgba(118, 75, 162, 0.4); }
+    }
+
+    /* Navigation bar animation */
+    .navbar {
+      animation: navSlideDown 0.8s ease-out;
+    }
+
+    @keyframes navSlideDown {
+      0% { transform: translateY(-100%); opacity: 0; }
+      100% { transform: translateY(0); opacity: 1; }
+    }
+
+    /* Carousel improvements with stagger animation */
+    .carousel .item {
+      animation: slideInUp 0.8s ease-out;
+      animation-fill-mode: both;
+    }
+
+    .carousel .item:nth-child(1) { animation-delay: 0.1s; }
+    .carousel .item:nth-child(2) { animation-delay: 0.2s; }
+    .carousel .item:nth-child(3) { animation-delay: 0.3s; }
+    .carousel .item:nth-child(4) { animation-delay: 0.4s; }
+
+    @keyframes slideInUp {
+      0% { 
+        transform: translateY(50px);
+        opacity: 0;
+      }
+      100% { 
+        transform: translateY(0);
+        opacity: 1;
+      }
+    }
+
+    /* Floating animation for buttons */
+    .custom-button {
+      animation: float 3s ease-in-out infinite;
+    }
+
+    .custom-button:nth-child(1) { animation-delay: 0s; }
+    .custom-button:nth-child(2) { animation-delay: 0.5s; }
+
+    @keyframes float {
+      0%, 100% { transform: translateY(0px); }
+      50% { transform: translateY(-5px); }
+    }
+
+    /* Pulse animation for back to top button */
+    #backToTop {
+      animation: pulse 2s ease-in-out infinite;
+    }
+
+    @keyframes pulse {
+      0%, 100% { box-shadow: 0 4px 12px rgba(0,0,0,0.15); }
+      50% { box-shadow: 0 4px 20px rgba(102, 126, 234, 0.4); }
+    }
+
+    /* Zoom effect for modal images */
+    #modalImg {
+      animation: modalZoom 0.3s ease-out;
+    }
+
+    @keyframes modalZoom {
+      0% { 
+        transform: scale(0.8);
+        opacity: 0;
+      }
+      100% { 
+        transform: scale(1);
+        opacity: 1;
+      }
     }
   </style>
 
@@ -192,9 +439,75 @@
 
     window.addEventListener('scroll', fadeInOnScroll);
     window.addEventListener('load', fadeInOnScroll);
+
+    // Particle animation
+    function createParticle() {
+      const particle = document.createElement('div');
+      particle.className = 'particle';
+      
+      const size = Math.random() * 4 + 2;
+      const startPosition = Math.random() * window.innerWidth;
+      const animationDuration = Math.random() * 10 + 15;
+      
+      particle.style.width = size + 'px';
+      particle.style.height = size + 'px';
+      particle.style.left = startPosition + 'px';
+      particle.style.animationDuration = animationDuration + 's';
+      
+      document.querySelector('.particles-container').appendChild(particle);
+      
+      setTimeout(() => {
+        particle.remove();
+      }, animationDuration * 1000);
+    }
+
+    // Create particles
+    function startParticles() {
+      setInterval(createParticle, 300);
+    }
+
+    // Start particle animation after page load
+    window.addEventListener('load', startParticles);
+
+    // Custom cursor effect
+    let cursorDot, cursorOutline;
+    
+    window.addEventListener('load', function() {
+      // Create cursor elements
+      cursorDot = document.createElement('div');
+      cursorDot.className = 'cursor-dot';
+      document.body.appendChild(cursorDot);
+      
+      cursorOutline = document.createElement('div');
+      cursorOutline.className = 'cursor-outline';
+      document.body.appendChild(cursorOutline);
+      
+      // Track mouse movement
+      document.addEventListener('mousemove', function(e) {
+        cursorDot.style.left = e.clientX + 'px';
+        cursorDot.style.top = e.clientY + 'px';
+        
+        cursorOutline.style.left = e.clientX + 'px';
+        cursorOutline.style.top = e.clientY + 'px';
+      });
+      
+      // Add hover effect for clickable elements
+      const hoverElements = document.querySelectorAll('a, button, .custom-button, img[onclick]');
+      hoverElements.forEach(element => {
+        element.addEventListener('mouseenter', () => {
+          cursorOutline.classList.add('hover');
+        });
+        element.addEventListener('mouseleave', () => {
+          cursorOutline.classList.remove('hover');
+        });
+      });
+    });
   </script>
 </head>
 <body>
+
+  <!-- Particle Background -->
+  <div class="particles-container"></div>
 
   <!-- Navigation Bar -->
   <nav class="navbar is-fixed-top" role="navigation" aria-label="main navigation" style="background-color: rgba(255,255,255,0.95); backdrop-filter: blur(10px); box-shadow: 0 2px 8px rgba(0,0,0,0.1); transition: all 0.3s ease;">
@@ -287,6 +600,8 @@
   </div>
 </section>
 
+<!-- Decorative divider -->
+<div class="section-divider"></div>
 
 <!-- Teaser video-->
 <section class="hero teaser" id="framework">
@@ -301,6 +616,9 @@
   </div>
 </section>
 <!-- End teaser video -->
+
+<!-- Decorative divider -->
+<div class="section-divider"></div>
 
 <!-- Paper abstract -->
 <section class="section hero is-light" id="abstract">
@@ -319,6 +637,8 @@
 </section>
 <!-- End paper abstract -->
 
+<!-- Decorative divider -->
+<div class="section-divider"></div>
 
 <!-- Image carousel -->
 <section class="hero is-small" id="results">
@@ -327,28 +647,32 @@
       <div id="results-carousel" class="carousel results-carousel">
        <div class="item" style="display: flex; flex-direction: column; align-items: center;">
         <!-- Your image here -->
-        <img src="static/images/mask.jpg" alt="MY ALT TEXT" style="max-width: 100%; max-height: 400px; object-fit: contain;"/>
+        <img src="static/images/mask.jpg" alt="Masked Contrastive Alignment" id="carousel-img-1" style="max-width: 100%; max-height: 400px; object-fit: contain; cursor: pointer; transition: transform 0.3s ease, box-shadow 0.3s ease;" onclick="openModal('carousel-img-1')"/>
+        <p style="font-size: 0.8em; color: #777; margin-top: 0.3rem;">Click to view larger image</p>
         <h2 class="subtitle has-text-centered">
           Illustration of masked contrastive alignment. 
         </h2>
       </div>
       <div class="item" style="display: flex; flex-direction: column; align-items: center;">
         <!-- Your image here -->
-        <img src="static/images/physical_setup.jpg" alt="MY ALT TEXT" style="max-width: 100%; max-height: 400px; object-fit: contain;"/>
+        <img src="static/images/physical_setup.jpg" alt="Physical Setup" id="carousel-img-2" style="max-width: 100%; max-height: 400px; object-fit: contain; cursor: pointer; transition: transform 0.3s ease, box-shadow 0.3s ease;" onclick="openModal('carousel-img-2')"/>
+        <p style="font-size: 0.8em; color: #777; margin-top: 0.3rem;">Click to view larger image</p>
         <h2 class="subtitle has-text-centered">
           Real-world deployment setup and evaluation scenarios.
         </h2>
       </div>
       <div class="item" style="display: flex; flex-direction: column; align-items: center;">
         <!-- Your image here -->
-        <img src="static/images/physical_visualization.jpg" alt="MY ALT TEXT" style="max-width: 100%; max-height: 400px; object-fit: contain;"/>
+        <img src="static/images/physical_visualization.jpg" alt="Flight Trajectories" id="carousel-img-3" style="max-width: 100%; max-height: 400px; object-fit: contain; cursor: pointer; transition: transform 0.3s ease, box-shadow 0.3s ease;" onclick="openModal('carousel-img-3')"/>
+        <p style="font-size: 0.8em; color: #777; margin-top: 0.3rem;">Click to view larger image</p>
         <h2 class="subtitle has-text-centered">
           Visual comparison of flight trajectories in three physical scenarios.
         </h2>
       </div>
       <div class="item" style="display: flex; flex-direction: column; align-items: center;">
         <!-- Your image here -->
-        <img src="static/images/tra_physical.jpg" alt="MY ALT TEXT" style="max-width: 100%; max-height: 400px; object-fit: contain;"/>
+        <img src="static/images/tra_physical.jpg" alt="Trajectory Patterns" id="carousel-img-4" style="max-width: 100%; max-height: 400px; object-fit: contain; cursor: pointer; transition: transform 0.3s ease, box-shadow 0.3s ease;" onclick="openModal('carousel-img-4')"/>
+        <p style="font-size: 0.8em; color: #777; margin-top: 0.3rem;">Click to view larger image</p>
         <h2 class="subtitle has-text-centered">
           Velocity-annotated trajectories highlighting movement patterns of OMC-RL and CURL.
         </h2>
