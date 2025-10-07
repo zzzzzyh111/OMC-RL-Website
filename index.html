@@ -24,7 +24,7 @@
   <meta name="viewport" content="width=device-width, initial-scale=1">
 
 
-  <title>Oracle-Guided Masked Contrastive Reinforcement Learning for Drone Visuomotor Policies</title>
+  <title>Oracle-Guided Masked Contrastive Reinforcement Learning for Visuomotor Policies</title>
   <link rel="icon" type="image/x-icon" href="static/images/favicon.ico">
   <link href="https://fonts.googleapis.com/css?family=Google+Sans|Noto+Sans|Castoro"
   rel="stylesheet">
@@ -111,7 +111,11 @@
 
     /* Carousel improvements */
     .carousel .item {
-      padding: 2rem 1rem;
+      padding: 1.5rem 1rem;
+      min-height: auto;
+      display: flex;
+      align-items: center;
+      justify-content: center;
     }
 
     /* Section spacing */
@@ -181,11 +185,11 @@
     }
 
     /* Carousel image hover effects */
-    #carousel-img-1:hover, #carousel-img-2:hover, 
+    #carousel-img-1:hover, #carousel-img-2:hover,
     #carousel-img-3:hover, #carousel-img-4:hover {
-      transform: scale(1.02);
-      box-shadow: 0 10px 30px rgba(0,0,0,0.1);
+      transform: scale(1.05);
     }
+
 
     /* Decorative section dividers */
     .section-divider {
@@ -454,7 +458,7 @@
       <div class="container is-max-desktop">
         <div class="columns is-centered">
           <div class="column has-text-centered">
-            <h1 class="title is-1 publication-title">Oracle-Guided Masked Contrastive Reinforcement Learning for Drone Visuomotor Policies</h1>
+            <h1 class="title is-1 publication-title">Oracle-Guided Masked Contrastive Reinforcement Learning for Visuomotor Policies</h1>
             <div class="is-size-5 publication-authors">
               <!-- Paper authors -->
               <span class="author-block">
@@ -476,19 +480,19 @@
                   <div class="column has-text-centered">
                     <div class="publication-links">
                          <!-- Arxiv PDF link -->
-                      <!-- <span class="link-block">
+                      <span class="link-block">
                         <a href="https://arxiv.org/pdf/<ARXIV PAPER ID>.pdf" target="_blank"
-                        class="external-link button is-normal is-rounded is-dark">
+                        class="external-link button is-normal is-rounded is-dark custom-button">
                         <span class="icon">
                           <i class="fas fa-file-pdf"></i>
                         </span>
                         <span>Paper</span>
                       </a>
-                    </span> -->
+                    </span>
 
                     <!-- Supplementary PDF link -->
                     <span class="link-block">
-                      <a href="https://www.youtube.com/watch?v=De2RkUzldBg&t=5s" target="_blank"
+                      <a href="https://www.youtube.com/watch?v=gyxB5Yls3jg&t=7s" target="_blank"
                       class="external-link button is-normal is-rounded is-dark custom-button">
                       <span class="icon">
                         <i class="fas fa-video"></i>
@@ -535,8 +539,8 @@
     <div class="hero-body has-text-centered fade-in">
       <img src="static/images/framework.jpg" alt="Framework Overview" style="max-width: 100%; height: auto; cursor: pointer; transition: transform 0.3s ease, box-shadow 0.3s ease;" id="framework-img" onclick="openModal('framework-img')">
       <p style="font-size: 0.9em; color: #777; margin-top: 0.5rem;">Click to view larger image</p>
-      <h2 class="subtitle has-text-centered mt-4">
-        The framework of OMC-RL. Upstream training (top): A masked contrastive learning module is used to learn compact and task-relevant visual representations from sequential RGB inputs. The masked and original inputs are processed through CNN encoders and projection layers, while the masked branch is further processed by an auxiliary transformer module to compute the contrastive loss L_cl. After training, the CNN encoder is frozen and the transformer module is discarded. Downstream training (bottom): An RL agent is trained with the frozen encoder from the upstream stage. An oracle policy trained with privileged depth inputs and full-state information provides expert supervision. The agent policy is optimized via KL-divergence against the oracle policy distribution to enable efficient visuomotor policy learning.
+      <h2 class="subtitle has-text-justified mt-4">
+        The framework of OMC-RL. (a) Upstream Masked Contrastive Representation Learning: A masked contrastive learning module is used to learn compact and task-relevant visual representations from sequential RGB inputs. The masked and original inputs are processed through CNN encoders and projection layers, while the masked branch is further processed by an auxiliary transformer module to compute the contrastive loss. After training, the CNN encoder is frozen and the transformer module is discarded. (b) Downstream Oracle-Guided Policy Learning: An oracle teacher policy is first trained using privileged depth inputs and full-state information, providing expert action distributions for downstream supervision. This oracle network supervises the student policy through a learning-by-cheating strategy. Specifically, the agent policy is optimized via KL-divergence against the oracle policy distribution to enable efficient visuomotor policy learning.
       </h2>
     </div>
   </div>
@@ -554,7 +558,7 @@
         <h2 class="title is-3">Abstract</h2>
         <div class="content has-text-justified">
           <p>
-            A prevailing approach for learning visuomotor policies in drones is to employ reinforcement learning to map high-dimensional visual observations directly to action commands. However, the combination of high-dimensional visual inputs and agile maneuver outputs leads to long-standing challenges, including low sample efficiency and significant sim-to-real gaps. To address these issues, we propose Oracle-Guided Masked Contrastive Reinforcement Learning (OMC-RL), a novel framework designed to improve the sample efficiency and asymptotic performance of visuomotor policy learning. OMC-RL explicitly decouples the learning process into two stages: an upstream representation learning stage and a downstream policy learning stage. In the upstream phase, a masked Transformer module is trained with temporal modeling and contrastive learning to extract temporally-aware and task-relevant representations from sequential visual inputs. After training, the learned encoder is frozen and used to extract visual representations from consecutive frames, while the Transformer module is discarded. In the downstream phase, an oracle teacher policy with privileged access to global state information supervises the agent during early training to provide informative guidance and accelerate early policy learning. This guidance is gradually reduced to allow independent exploration as training progresses. Extensive experiments in simulated and real-world environments demonstrate that OMC-RL achieves superior sample efficiency and asymptotic policy performance, while also improving generalization across diverse and perceptually complex scenarios.
+            A prevailing approach for learning visuomotor policies is to employ reinforcement learning to map high-dimensional visual observations directly to action commands. However, the combination of high-dimensional visual inputs and agile maneuver outputs leads to long-standing challenges, including low sample efficiency and significant sim-to-real gaps. To address these issues, we propose Oracle-Guided Masked Contrastive Reinforcement Learning (OMC-RL), a novel framework designed to improve the sample efficiency and asymptotic performance of visuomotor policy learning. OMC-RL explicitly decouples the learning process into two stages: an upstream representation learning stage and a downstream policy learning stage. In the upstream stage, a masked Transformer module is trained with temporal modeling and contrastive learning to extract temporally-aware and task-relevant representations from sequential visual inputs. After training, the learned encoder is frozen and used to extract visual representations from consecutive frames, while the Transformer module is discarded. In the downstream stage, an oracle teacher policy with privileged access to global state information supervises the agent during early training to provide informative guidance and accelerate early policy learning. This guidance is gradually reduced to allow independent exploration as training progresses. Extensive experiments in simulated and real-world environments demonstrate that OMC-RL achieves superior sample efficiency and asymptotic policy performance, while also improving generalization across diverse and perceptually complex scenarios.
           </p>
         </div>
       </div>
@@ -571,35 +575,43 @@
   <div class="hero-body">
     <div class="container fade-in">
       <div id="results-carousel" class="carousel results-carousel">
-       <div class="item" style="display: flex; flex-direction: column; align-items: center;">
+       <div class="item" style="display: flex; flex-direction: column; align-items: center; justify-content: center; padding: 2rem 1rem;">
         <!-- Your image here -->
-        <img src="static/images/mask.jpg" alt="Masked Contrastive Alignment" id="carousel-img-1" style="max-width: 100%; max-height: 400px; object-fit: contain; cursor: pointer; transition: transform 0.3s ease, box-shadow 0.3s ease;" onclick="openModal('carousel-img-1')"/>
-        <p style="font-size: 0.8em; color: #777; margin-top: 0.3rem;">Click to view larger image</p>
-        <h2 class="subtitle has-text-centered">
-          Illustration of masked contrastive alignment. 
+        <div style="margin-bottom: 1rem;">
+          <img src="static/images/mask.png" alt="Masked Contrastive Learning" id="carousel-img-1" style="max-width: 100%; max-height: 500px; object-fit: contain; cursor: pointer; transition: all 0.4s ease;" onclick="openModal('carousel-img-1')"/>
+        </div>
+        <p style="font-size: 0.75em; color: #999; margin-bottom: 0.8rem; font-style: italic;">Click to view larger image</p>
+        <h2 class="subtitle has-text-centered" style="font-size: 1.1rem; line-height: 1.4; max-width: 90%; color: #444;">
+          Illustration of different learning paradigms for goal-conditioned representation and policy learning.
         </h2>
       </div>
-      <div class="item" style="display: flex; flex-direction: column; align-items: center;">
+      <div class="item" style="display: flex; flex-direction: column; align-items: center; justify-content: center; padding: 2rem 1rem;">
         <!-- Your image here -->
-        <img src="static/images/physical_setup.jpg" alt="Physical Setup" id="carousel-img-2" style="max-width: 100%; max-height: 400px; object-fit: contain; cursor: pointer; transition: transform 0.3s ease, box-shadow 0.3s ease;" onclick="openModal('carousel-img-2')"/>
-        <p style="font-size: 0.8em; color: #777; margin-top: 0.3rem;">Click to view larger image</p>
-        <h2 class="subtitle has-text-centered">
+        <div style="margin-bottom: 1rem;">
+          <img src="static/images/physical_setup.jpg" alt="Physical Setup" id="carousel-img-2" style="max-width: 100%; max-height: 500px; object-fit: contain; cursor: pointer; transition: all 0.4s ease;" onclick="openModal('carousel-img-2')"/>
+        </div>
+        <p style="font-size: 0.75em; color: #999; margin-bottom: 0.8rem; font-style: italic;">Click to view larger image</p>
+        <h2 class="subtitle has-text-centered" style="font-size: 1.1rem; line-height: 1.4; max-width: 90%; color: #444;">
           Real-world deployment setup and evaluation scenarios.
         </h2>
       </div>
-      <div class="item" style="display: flex; flex-direction: column; align-items: center;">
+      <div class="item" style="display: flex; flex-direction: column; align-items: center; justify-content: center; padding: 2rem 1rem;">
         <!-- Your image here -->
-        <img src="static/images/physical_visualization.jpg" alt="Flight Trajectories" id="carousel-img-3" style="max-width: 100%; max-height: 400px; object-fit: contain; cursor: pointer; transition: transform 0.3s ease, box-shadow 0.3s ease;" onclick="openModal('carousel-img-3')"/>
-        <p style="font-size: 0.8em; color: #777; margin-top: 0.3rem;">Click to view larger image</p>
-        <h2 class="subtitle has-text-centered">
+        <div style="margin-bottom: 1rem;">
+          <img src="static/images/physical_visualization.jpg" alt="Flight Trajectories" id="carousel-img-3" style="max-width: 100%; max-height: 500px; object-fit: contain; cursor: pointer; transition: all 0.4s ease;" onclick="openModal('carousel-img-3')"/>
+        </div>
+        <p style="font-size: 0.75em; color: #999; margin-bottom: 0.8rem; font-style: italic;">Click to view larger image</p>
+        <h2 class="subtitle has-text-centered" style="font-size: 1.1rem; line-height: 1.4; max-width: 90%; color: #444;">
           Visual comparison of flight trajectories in three physical scenarios.
         </h2>
       </div>
-      <div class="item" style="display: flex; flex-direction: column; align-items: center;">
+      <div class="item" style="display: flex; flex-direction: column; align-items: center; justify-content: center; padding: 2rem 1rem;">
         <!-- Your image here -->
-        <img src="static/images/tra_physical.jpg" alt="Trajectory Patterns" id="carousel-img-4" style="max-width: 100%; max-height: 400px; object-fit: contain; cursor: pointer; transition: transform 0.3s ease, box-shadow 0.3s ease;" onclick="openModal('carousel-img-4')"/>
-        <p style="font-size: 0.8em; color: #777; margin-top: 0.3rem;">Click to view larger image</p>
-        <h2 class="subtitle has-text-centered">
+        <div style="margin-bottom: 1rem;">
+          <img src="static/images/tra_physical.jpg" alt="Trajectory Patterns" id="carousel-img-4" style="max-width: 100%; max-height: 500px; object-fit: contain; cursor: pointer; transition: all 0.4s ease;" onclick="openModal('carousel-img-4')"/>
+        </div>
+        <p style="font-size: 0.75em; color: #999; margin-bottom: 0.8rem; font-style: italic;">Click to view larger image</p>
+        <h2 class="subtitle has-text-centered" style="font-size: 1.1rem; line-height: 1.4; max-width: 90%; color: #444;">
           Velocity-annotated trajectories highlighting movement patterns of OMC-RL and CURL.
         </h2>
       </div>
